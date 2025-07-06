@@ -1,0 +1,29 @@
+version: '3.8'
+
+name: TelegramBotServices
+services:
+  client:
+    container_name: client
+    ports:
+      - "1230:1230"
+    build:
+      context: ../Client
+    networks:
+      - app-net
+  server:
+    container_name: server
+    ports:
+      - "8932:8932"
+    build:
+      context: ../ServerLab6
+    networks:
+      - app-net
+  telegram-bot:
+    container_name: telegram-bot
+    build:
+      context: ../TelegramBot
+    networks:
+      - app-net
+networks:
+  app-net:
+    driver: bridge
